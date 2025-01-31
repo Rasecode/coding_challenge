@@ -1,24 +1,88 @@
-# FastAPI Application with Docker
+# 🚀 FastAPI Dockerized Application for Data Migration & API Integration
 
-This project demonstrates how to run a FastAPI application using Docker. The application is designed to perform specific database operations and expose endpoints through FastAPI. It is connected to a Microsoft SQL Server database and uses Azure Blob Storage for backups.
+## 📌 Project Overview
 
-## Project Setup and Instructions
+This project demonstrates how to quickly set up and run a **FastAPI application** inside a **Docker container**, designed to handle **big data migration** to a **SQL-based database system**. 
 
-### Prerequisites
+The application is built to:
+- 📂 **Migrate historical data** from **CSV files** to a SQL database.
+- 🔄 **Expose a REST API** for receiving new transactions in real-time.
+- 🛡️ **Validate data before insertion**, ensuring compliance with business rules.
+- 📦 **Support batch processing**, allowing up to **1000 transactions per request**.
+- 💾 **Implement backup and restore functionality**, storing table backups in **AVRO format**.
+- ☁️ **Leverage cloud storage (Azure Data Lake Storage Gen2)** for secure and scalable data management.
 
-Before starting, ensure you have the following installed on your local machine:
+This solution is containerized using **Docker**, making it easy to deploy and scale across different environments.
 
-- **Docker**: For containerizing and running the FastAPI application in a container.
-- **Python 3.11**: For setting up the development environment and dependencies.
-- **SQL Server ODBC Driver**: The application connects to SQL Server using `pyodbc`.
+---
 
-### Step 1: Clone the Repository
+## 🛠️ Features
 
-Start by cloning the repository to your local machine:
+- 🔹 **FastAPI Backend**: High-performance REST API.
+- 🔹 **CSV to SQL Migration**: Moves historical data to a structured database.
+- 🔹 **Real-Time Data Ingestion**: Processes new transactions via a REST API.
+- 🔹 **Batch Processing**: Handles bulk inserts (1 to 1000 rows per request).
+- 🔹 **Data Integrity & Validation**: Logs invalid transactions while maintaining data consistency.
+- 🔹 **Backup & Restore Mechanism**: Saves tables in **AVRO format** and restores when needed.
+- 🔹 **Azure Blob Storage Integration**: Securely stores backups in **Azure Data Lake Storage Gen2 (ADLS2)**.
+- 🔹 **Dockerized Deployment**: Simplifies execution and cloud integration.
+- 🔹 **JWT Authentication**: Uses **HS256** for secure API access.
 
-```bash
-git clone https://github.com/your-repository-url
-cd your-repository-folder
+---
+
+## 📌 Prerequisites
+
+Before running this application, ensure you have the following resources created:
+
+### **1️⃣ Azure SQL Database**
+- A **SQL-based database** for storing both migrated and incoming data.
+- Required details:
+  - **Database Host** (e.g., `your-database.database.windows.net`)
+  - **Database Name** (e.g., `your_db_name`)
+  - **Username & Password** for authentication.
+  - **ODBC Driver** installed (see troubleshooting section).
+
+### **2️⃣ Azure Data Lake Storage Gen2 (ADLS2)**
+- Required for **storing backups** in **AVRO format**.
+- Needed details:
+  - **Storage Account Name**
+  - **Container Name**
+  - **Storage Connection String**
+
+### **3️⃣ Software Requirements**
+- **Python 3.11** or later
+- **Docker** installed
+- **Azure CLI** (optional but recommended)
+
+---
+
+## ⚙️ How the Application Works
+
+1. **Data Migration**  
+   - Reads **historical data from CSV files**.
+   - Validates transactions based on **predefined rules**.
+   - Inserts valid data into the **SQL database**, while logging invalid transactions.
+
+2. **REST API for Data Ingestion**  
+   - Accepts new transactions via **FastAPI-based API**.
+   - Supports **batch processing** of up to **1000 rows per request**.
+   - Ensures **data integrity**, rejecting non-compliant transactions.
+
+3. **Backup & Restore Mechanism**  
+   - Creates **periodic backups** in **AVRO format**.
+   - Saves backups in **Azure Data Lake Storage Gen2**.
+   - Allows **restoration of specific tables** from backups.
+
+Once everything is set up, the API documentation is available at:  
+🔹 **Swagger UI** → [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+---
+
+## 📌 Step 1: Clone the Repository
+
+```sh
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
 ```
 
 ## Step 2: Create and Set Up a Python Virtual Environment
