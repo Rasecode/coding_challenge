@@ -3,3 +3,8 @@ env_project/
 test_connection/
 test/
 generate_csv.py
+app/__pycache__/
+backups/
+__pycache__/
+*.pyc
+*.pyo
